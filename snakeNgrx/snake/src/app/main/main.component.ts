@@ -4,6 +4,9 @@ import * as fromGame from '../store/state/game.state';
 import * as fromGameSelectors from '../store/selectors/game.selector';
 import { StartGame, AnimationFrame, MoveDown, MoveUp, MoveRight, MoveLeft, ReInit } from '../store/actions/game.actions';
 import { HostListener } from '@angular/core';
+import { Snake } from '../constants/snake.constants';
+import { Apple } from '../store/models/apple.model';
+import { SnakePosition } from '../store/models/snake-position.model';
 
 @Component({
   selector: 'app-main',
@@ -19,8 +22,10 @@ export class MainComponent implements OnInit {
 
   public gameStarted: boolean;
   public gameOver: boolean;
-  public snakeHeadPosition: fromGame.SnakePosition;
+  public snakeHeadPosition: SnakePosition;
   public interval: any;
+  public apple: Apple;
+  public score: number;
 
   ngOnInit() {
     this.store.pipe(select(fromGameSelectors.getGameStarted)).subscribe(
@@ -32,6 +37,18 @@ export class MainComponent implements OnInit {
     this.store.pipe(select(fromGameSelectors.getSnakeHeadPosition)).subscribe(
       snakeHeadPosition => {
         this.snakeHeadPosition = snakeHeadPosition;
+      }
+    );
+
+    this.store.pipe(select(fromGameSelectors.getApple)).subscribe(
+      apple => {
+        this.apple = apple;
+      }
+    );
+
+    this.store.pipe(select(fromGameSelectors.getScore)).subscribe(
+      score => {
+        this.score = score;
       }
     );
 
@@ -56,7 +73,7 @@ export class MainComponent implements OnInit {
       clearInterval(this.interval);
       this.interval = setInterval(() => {
         this.store.dispatch(new AnimationFrame());
-      }, 50);
+      }, Snake.Speed);
     }
   }
 

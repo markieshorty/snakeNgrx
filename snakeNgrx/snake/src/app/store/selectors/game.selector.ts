@@ -15,5 +15,15 @@ export const getGameOver = createSelector(
 
 export const getSnakeHeadPosition = createSelector(
     getGameFeatureState,
-    state => state.snakeHeadPosition
+    state => state.snakePosition
+);
+
+export const getApple = createSelector(
+    getGameFeatureState,
+    state => state.apple
+);
+
+export const getScore = createSelector(
+    getGameFeatureState,
+    state => state.score
 );

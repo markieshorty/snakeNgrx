@@ -1,22 +1,20 @@
-import { GameState, SnakePosition } from '../state/game.state';
+import { GameState } from '../state/game.state';
 import { initialGameState } from '../state/game.initial.state';
 import { GameActionTypes } from '../actions/game.actions';
 import { GameActions } from '../actions/game.actions';
 import { Directions } from 'src/app/constants/directions.constants';
 import { ArenaDimensions } from 'src/app/constants/arena-dimensions.constants';
+import { Snake } from 'src/app/constants/snake.constants';
+import { GameReducerHelper } from '../reducer-helpers/game-reducer.helper';
+import { Apple } from '../models/apple.model';
+import { SnakePosition } from '../models/snake-position.model';
 
 const intitialState: GameState = initialGameState;
 
-
 export function gameReducer(state = intitialState, action: GameActions): GameState {
     switch (action.type) {
-        case GameActionTypes.IncrementScore: {
-            return {
-                ...state,
-                score: state.score++
-            }
-        }
         case GameActionTypes.StartGame: {
+
             return {
                 ...state,
                 gameStarted: true
@@ -56,52 +54,55 @@ export function gameReducer(state = intitialState, action: GameActions): GameSta
             }
         }
         case GameActionTypes.AnimationFrame: {
-            let newSnakeHeadPosition = new SnakePosition();
-            newSnakeHeadPosition.body = state.snakeHeadPosition.body;
+            let newSnakePosition = new SnakePosition();
+            newSnakePosition.body = JSON.parse(JSON.stringify(state.snakePosition.body));
 
             if (state.directionOfTravel === Directions.RIGHT) {
-                newSnakeHeadPosition.x = state.snakeHeadPosition.x + 5;
-                newSnakeHeadPosition.y = state.snakeHeadPosition.y;
+                newSnakePosition.x = state.snakePosition.x + Snake.Width;
+                newSnakePosition.y = state.snakePosition.y;
             }
             else if (state.directionOfTravel === Directions.DOWN) {
-                newSnakeHeadPosition.x = state.snakeHeadPosition.x;
-                newSnakeHeadPosition.y = state.snakeHeadPosition.y + 5;
+                newSnakePosition.x = state.snakePosition.x;
+                newSnakePosition.y = state.snakePosition.y + Snake.Width;
             }
             else if (state.directionOfTravel === Directions.UP) {
-                newSnakeHeadPosition.x = state.snakeHeadPosition.x;
-                newSnakeHeadPosition.y = state.snakeHeadPosition.y - 5;
+                newSnakePosition.x = state.snakePosition.x;
+                newSnakePosition.y = state.snakePosition.y - Snake.Width;
             }
             else if (state.directionOfTravel === Directions.LEFT) {
-                newSnakeHeadPosition.x = state.snakeHeadPosition.x - 5;
-                newSnakeHeadPosition.y = state.snakeHeadPosition.y;
+                newSnakePosition.x = state.snakePosition.x - Snake.Width;
+                newSnakePosition.y = state.snakePosition.y;
+            }
+
+            let newScore = state.score;
+            let newApple = state.apple;
+            let justAte = false;
+
+            if (GameReducerHelper.snakeEatingApple(newSnakePosition, state.apple)) {
+                newScore++;
+                justAte = true;
+                newApple = new Apple();
             }
 
             let gameOver = false;
-            if (newSnakeHeadPosition.x < 0 ||
-                newSnakeHeadPosition.x > ArenaDimensions.WIDTH ||
-                newSnakeHeadPosition.y < 0 ||
-                newSnakeHeadPosition.y > ArenaDimensions.HEIGHT) {
+            if (newSnakePosition.x < 0 ||
+                newSnakePosition.x > (ArenaDimensions.WIDTH - Snake.Width) ||
+                newSnakePosition.y < 0 ||
+                newSnakePosition.y > (ArenaDimensions.HEIGHT - Snake.Width)) {
                 gameOver = true;
             }
 
-            newSnakeHeadPosition = updateBody(newSnakeHeadPosition, state);
+            newSnakePosition = GameReducerHelper.updateBody(newSnakePosition, state, justAte);
 
             return {
                 ...state,
-                snakeHeadPosition: newSnakeHeadPosition,
-                gameOver: gameOver
+                snakePosition: newSnakePosition,
+                gameOver: gameOver,
+                score: newScore,
+                apple: newApple
             }
         }
         default:
             return state;
     }
-}
-
-function updateBody(newSnakeHeadPosition: SnakePosition, state: GameState) {
-    // add item to front of array with old head position
-    newSnakeHeadPosition.body.unshift({ x: state.snakeHeadPosition.x, y: state.snakeHeadPosition.y });
-    // remove last item of the array
-    newSnakeHeadPosition.body.pop();
-
-    return newSnakeHeadPosition;
 }

@@ -1,4 +1,4 @@
 export class ArenaDimensions {
-    public static HEIGHT = 600;
-    public static WIDTH = 1100;
+    public static HEIGHT = 200;
+    public static WIDTH = 400;
 }

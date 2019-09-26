@@ -1,19 +1,19 @@
-import { GameState } from './game.state';
+import { BodyPosition } from './body-position.model';
 import { Snake } from 'src/app/constants/snake.constants';
-import { Apple } from '../models/apple.model';
 
-export const initialGameState: GameState = {
-    gameOver: false,
-    score: 0,
-    gameStarted: false,
-    directionOfTravel: 'R',
-    apple: new Apple(),
-    snakePosition: {
-        x: 0,
-        y: 100,
-        body: [
+export class SnakePosition {
+    public x: number;
+    public y: number;
+
+    public body: BodyPosition[];
+
+    constructor() {
+        this.x = 0;
+        this.y = 0;
+
+        this.body = [
             {
-                x: - Snake.Width,
+                x: -Snake.Width,
                 y: 100
             },
             {

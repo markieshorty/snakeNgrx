@@ -6,17 +6,8 @@ export enum GameActionTypes {
     MoveDown = 'MOVE_DOWN',
     MoveLeft = 'MOVE_LEFT',
     MoveRight = 'MOVE_RIGHT',
-    IncrementScore = 'INCREMENT_SCORE',
-    DecrementLives = 'DECREMENT_LIVES',
-    GameOver = 'GAME_OVER',
     AnimationFrame = 'ANIMATION_FRAME',
     ReInit = 'REINIT'
-}
-
-export class IncrementScore implements Action {
-    readonly type = GameActionTypes.IncrementScore
-
-    constructor(public payload: any) { }
 }
 
 export class StartGame implements Action {
@@ -30,7 +21,6 @@ export class ReInit implements Action {
 
     constructor() { }
 }
-
 
 export class AnimationFrame implements Action {
     readonly type = GameActionTypes.AnimationFrame
@@ -62,4 +52,4 @@ export class MoveRight implements Action {
     constructor() { }
 }
 
-export type GameActions = IncrementScore | StartGame | AnimationFrame | MoveDown | MoveUp | MoveLeft | MoveRight | ReInit;
+export type GameActions = StartGame | AnimationFrame | MoveDown | MoveUp | MoveLeft | MoveRight | ReInit;
