@@ -1,0 +1,20 @@
+.arena{
+    position: relative;
+    height: 600px;
+    width: 1100px;
+    border: 1px solid black;
+}
+
+.snakeHead {
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    background-color: black;
+}
+
+.snakeBodyCell {
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    background-color: black;
+}
