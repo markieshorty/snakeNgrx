@@ -9,21 +9,21 @@
     position: absolute;
     height: 7px;
     width: 7px;
-    background-color: black;
+    background-color: green;
 }
 
 .snakeBodyCell {
     position: absolute;
     height: 7px;
     width: 7px;
-    background-color: black;
+    background-color: green;
 }
 
 .apple {
     position: absolute;
     height: 7px;
     width: 7px;
-    background-color: green;
+    background-color: red;
     border-radius: 3px;
 }
 

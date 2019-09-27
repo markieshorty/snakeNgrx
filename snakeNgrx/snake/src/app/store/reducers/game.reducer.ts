@@ -96,7 +96,8 @@ export function gameReducer(state = intitialState, action: GameActions): GameSta
             if (newSnakePosition.x < 0 ||
                 newSnakePosition.x > (ArenaDimensions.WIDTH - Snake.Width) ||
                 newSnakePosition.y < 0 ||
-                newSnakePosition.y > (ArenaDimensions.HEIGHT - Snake.Width)) {
+                newSnakePosition.y > (ArenaDimensions.HEIGHT - Snake.Width) ||
+                GameReducerHelper.snakeHitHimself(newSnakePosition)) {
                 gameOver = true;
                 gameStarted = false;
 

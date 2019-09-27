@@ -25,4 +25,17 @@ export class GameReducerHelper {
 
         return newSnakePosition;
     }
+
+    static snakeHitHimself(newSnakePosition: SnakePosition): boolean {
+        let result = false;
+        newSnakePosition.body.forEach(bodyCell => {
+            let distanceX = Math.abs(newSnakePosition.x - bodyCell.x);
+            let distanceY = Math.abs(newSnakePosition.y - bodyCell.y);
+
+            if (distanceX < Snake.Width && distanceY < Snake.Width) {
+                result = true;
+            }
+        });
+        return result;
+    }
 }
