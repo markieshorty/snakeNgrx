@@ -22,7 +22,13 @@ export function gameReducer(state = intitialState, action: GameActions): GameSta
         }
         case GameActionTypes.ReInit: {
             return {
-                ...intitialState
+                ...state,
+                directionOfTravel: 'R',
+                score: 0,
+                gameStarted: false,
+                gameOver: false,
+                apple: new Apple(),
+                snakePosition: Snake.DefaultSnakePosition
             }
         }
         case GameActionTypes.MoveDown: {
@@ -85,11 +91,18 @@ export function gameReducer(state = intitialState, action: GameActions): GameSta
             }
 
             let gameOver = false;
+            let gameStarted = state.gameStarted;
+            let highestScore = state.highestScore;
             if (newSnakePosition.x < 0 ||
                 newSnakePosition.x > (ArenaDimensions.WIDTH - Snake.Width) ||
                 newSnakePosition.y < 0 ||
                 newSnakePosition.y > (ArenaDimensions.HEIGHT - Snake.Width)) {
                 gameOver = true;
+                gameStarted = false;
+
+                if (state.score > state.highestScore) {
+                    highestScore = state.score;
+                }
             }
 
             newSnakePosition = GameReducerHelper.updateBody(newSnakePosition, state, justAte);
@@ -98,8 +111,10 @@ export function gameReducer(state = intitialState, action: GameActions): GameSta
                 ...state,
                 snakePosition: newSnakePosition,
                 gameOver: gameOver,
+                gameStarted: gameStarted,
                 score: newScore,
-                apple: newApple
+                apple: newApple,
+                highestScore: highestScore
             }
         }
         default:

@@ -13,4 +13,5 @@ export interface GameState {
     snakePosition: SnakePosition;
     gameOver: boolean;
     apple: Apple;
+    highestScore: number;
 }

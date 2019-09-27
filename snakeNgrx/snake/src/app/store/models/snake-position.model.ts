@@ -8,30 +8,5 @@ export class SnakePosition {
     public body: BodyPosition[];
 
     constructor() {
-        this.x = 0;
-        this.y = 0;
-
-        this.body = [
-            {
-                x: -Snake.Width,
-                y: 100
-            },
-            {
-                x: - (Snake.Width * 2),
-                y: 100
-            },
-            {
-                x: - (Snake.Width * 3),
-                y: 100
-            },
-            {
-                x: - (Snake.Width * 4),
-                y: 100
-            },
-            {
-                x: - (Snake.Width * 5),
-                y: 100
-            }
-        ]
     }
 }

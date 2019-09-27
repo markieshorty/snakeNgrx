@@ -26,6 +26,7 @@ export class MainComponent implements OnInit {
   public interval: any;
   public apple: Apple;
   public score: number;
+  public highestScore: number;
 
   ngOnInit() {
     this.store.pipe(select(fromGameSelectors.getGameStarted)).subscribe(
@@ -56,19 +57,21 @@ export class MainComponent implements OnInit {
       gameOver => {
         this.gameOver = gameOver;
         if (this.gameOver) {
-          this.reinitialiseStore();
-          this.startGame();
+          clearInterval(this.interval);
         }
+      }
+    );
+
+    this.store.pipe(select(fromGameSelectors.getHighestScore)).subscribe(
+      highestScore => {
+        this.highestScore = highestScore;
       }
     );
   }
 
-  reinitialiseStore(): void {
-    this.store.dispatch(new ReInit());
-  }
-
   startGame(): void {
     if (!this.gameStarted) {
+      this.store.dispatch(new ReInit());
       this.store.dispatch(new StartGame());
       clearInterval(this.interval);
       this.interval = setInterval(() => {

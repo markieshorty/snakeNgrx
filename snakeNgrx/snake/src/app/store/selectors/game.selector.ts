@@ -27,3 +27,8 @@ export const getScore = createSelector(
     getGameFeatureState,
     state => state.score
 );
+
+export const getHighestScore = createSelector(
+    getGameFeatureState,
+    state => state.highestScore
+);
