@@ -1,6 +1,6 @@
 # Snake
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
+The project is intended to demonstrate how NGRX state management works- dispatch actions to the store, update the store then listen to changes in the store via strongly typed selectors. Enjoy.
 
 ## Development server
 
