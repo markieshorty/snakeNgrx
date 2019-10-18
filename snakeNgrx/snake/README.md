@@ -1,4 +1,6 @@
-Note this is a learning exercise for 'NGRX' (A library for angular state mgmt) so please use the framework as it is intended.
+Hello and welcome to my NGRX Dojo.
+
+this is a learning exercise for 'NGRX' (A library for angular state mgmt) so please use the framework as it is intended.
 See ngrxDiagram.png in this folder for a high level at the control flow.
 
 Try to meet the game requirements listed below. 
