@@ -33,6 +33,7 @@ export class MainComponent implements OnInit {
 
     this.store.pipe(select(fromGameSelectors.getGameStarted)).subscribe(
       gameStarted => {
+        // update class member with updated value from the store
         this.gameStarted = gameStarted;
       }
     );
