@@ -22,51 +22,22 @@ export class MainComponent implements OnInit {
 
   public gameStarted: boolean;
   public gameOver: boolean;
-  public snakeHeadPosition: SnakePosition;
+  public snakePosition: SnakePosition = new SnakePosition();
   public interval: any;
   public apple: Apple;
   public score: number;
   public highestScore: number;
 
   ngOnInit() {
+    // event listeners for store updates - when the store updates an event will fire and you can listen to the values via these event subscriptions
+
     this.store.pipe(select(fromGameSelectors.getGameStarted)).subscribe(
       gameStarted => {
         this.gameStarted = gameStarted;
       }
     );
 
-    this.store.pipe(select(fromGameSelectors.getSnakeHeadPosition)).subscribe(
-      snakeHeadPosition => {
-        this.snakeHeadPosition = snakeHeadPosition;
-      }
-    );
-
-    this.store.pipe(select(fromGameSelectors.getApple)).subscribe(
-      apple => {
-        this.apple = apple;
-      }
-    );
-
-    this.store.pipe(select(fromGameSelectors.getScore)).subscribe(
-      score => {
-        this.score = score;
-      }
-    );
-
-    this.store.pipe(select(fromGameSelectors.getGameOver)).subscribe(
-      gameOver => {
-        this.gameOver = gameOver;
-        if (this.gameOver) {
-          clearInterval(this.interval);
-        }
-      }
-    );
-
-    this.store.pipe(select(fromGameSelectors.getHighestScore)).subscribe(
-      highestScore => {
-        this.highestScore = highestScore;
-      }
-    );
+    // todo implement more event listeners here in order to update class members
   }
 
   startGame(): void {
@@ -82,23 +53,7 @@ export class MainComponent implements OnInit {
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowDown': {
-        this.store.dispatch(new MoveDown());
-        break;
-      }
-      case 'ArrowUp': {
-        this.store.dispatch(new MoveUp());
-        break;
-      }
-      case 'ArrowRight': {
-        this.store.dispatch(new MoveRight());
-        break;
-      }
-      case 'ArrowLeft': {
-        this.store.dispatch(new MoveLeft());
-        break;
-      }
-    }
+    console.log(event);
+    // todo implement. tip: write an if or switch statement and dispatch actions that get picked up in the game-reducer.ts
   }
 }

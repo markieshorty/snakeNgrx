@@ -13,7 +13,7 @@ export const getGameOver = createSelector(
     state => state.gameOver
 );
 
-export const getSnakeHeadPosition = createSelector(
+export const getSnakePosition = createSelector(
     getGameFeatureState,
     state => state.snakePosition
 );

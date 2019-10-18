@@ -11,10 +11,13 @@ import { SnakePosition } from '../models/snake-position.model';
 
 const intitialState: GameState = initialGameState;
 
+// the gameReducer takes gameActions and updates the state based on the action type and/or the payload of the action
 export function gameReducer(state = intitialState, action: GameActions): GameState {
+    // todo:  add more cases to the switch statement in order to update the 'directionOfTravel' property of the state object.
+    console.log(action.type);
+
     switch (action.type) {
         case GameActionTypes.StartGame: {
-
             return {
                 ...state,
                 gameStarted: true
@@ -31,91 +34,24 @@ export function gameReducer(state = intitialState, action: GameActions): GameSta
                 snakePosition: Snake.DefaultSnakePosition
             }
         }
-        case GameActionTypes.MoveDown: {
-            return {
-                ...state,
-                directionOfTravel:
-                    state.directionOfTravel !== Directions.UP ? Directions.DOWN : Directions.UP
-            };
-        }
-        case GameActionTypes.MoveUp: {
-            return {
-                ...state,
-                directionOfTravel:
-                    state.directionOfTravel !== Directions.DOWN ? Directions.UP : Directions.DOWN
-            }
-        }
-        case GameActionTypes.MoveRight: {
-            return {
-                ...state,
-                directionOfTravel:
-                    state.directionOfTravel !== Directions.LEFT ? Directions.RIGHT : Directions.LEFT
-            }
-        }
-        case GameActionTypes.MoveLeft: {
-            return {
-                ...state,
-                directionOfTravel:
-                    state.directionOfTravel !== Directions.RIGHT ? Directions.LEFT : Directions.RIGHT
-            }
-        }
         case GameActionTypes.AnimationFrame: {
+            // this action occurs every 75 ms via setInterval
             let newSnakePosition = new SnakePosition();
+            // sorry - deep clone of object
             newSnakePosition.body = JSON.parse(JSON.stringify(state.snakePosition.body));
 
-            if (state.directionOfTravel === Directions.RIGHT) {
-                newSnakePosition.x = state.snakePosition.x + Snake.Width;
-                newSnakePosition.y = state.snakePosition.y;
-            }
-            else if (state.directionOfTravel === Directions.DOWN) {
-                newSnakePosition.x = state.snakePosition.x;
-                newSnakePosition.y = state.snakePosition.y + Snake.Width;
-            }
-            else if (state.directionOfTravel === Directions.UP) {
-                newSnakePosition.x = state.snakePosition.x;
-                newSnakePosition.y = state.snakePosition.y - Snake.Width;
-            }
-            else if (state.directionOfTravel === Directions.LEFT) {
-                newSnakePosition.x = state.snakePosition.x - Snake.Width;
-                newSnakePosition.y = state.snakePosition.y;
-            }
+            // direction of travel is RIGHT so update X coordinate
+            newSnakePosition.x = state.snakePosition.x + Snake.Width;
+            newSnakePosition.y = state.snakePosition.y;
 
-            let newScore = state.score;
-            let newApple = state.apple;
-            let justAte = false;
+            // todo write code to handle three other travel directions
 
-            if (GameReducerHelper.snakeEatingApple(newSnakePosition, state.apple)) {
-                newScore++;
-                justAte = true;
-                newApple = new Apple();
-            }
-
-            let gameOver = false;
-            let gameStarted = state.gameStarted;
-            let highestScore = state.highestScore;
-            if (newSnakePosition.x < 0 ||
-                newSnakePosition.x > (ArenaDimensions.WIDTH - Snake.Width) ||
-                newSnakePosition.y < 0 ||
-                newSnakePosition.y > (ArenaDimensions.HEIGHT - Snake.Width) ||
-                GameReducerHelper.snakeHitHimself(newSnakePosition)) {
-                gameOver = true;
-                gameStarted = false;
-
-                if (state.score > state.highestScore) {
-                    highestScore = state.score;
-                }
-            }
-
-            newSnakePosition = GameReducerHelper.updateBody(newSnakePosition, state, justAte);
+            // todo - updateBody method so that the body follows the head
+            newSnakePosition = GameReducerHelper.updateBody(newSnakePosition, state);
 
             return {
                 ...state,
-                snakePosition: newSnakePosition,
-                gameOver: gameOver,
-                gameStarted: gameStarted,
-                score: newScore,
-                apple: newApple,
-                highestScore: highestScore
+                snakePosition: newSnakePosition
             }
         }
         default:

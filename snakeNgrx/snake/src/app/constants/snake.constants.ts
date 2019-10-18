@@ -1,6 +1,6 @@
 export class Snake {
     public static Width = 7;
-    public static Speed = 50;
+    public static Speed = 75;
     public static DefaultSnakePosition = {
         x: 0,
         y: 100,

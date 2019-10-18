@@ -1,27 +1,19 @@
-# Snake
+Note this is a learning exercise for 'NGRX' (A library for angular state mgmt) so please use the framework as it is intended.
+See ngrxDiagram.png in this folder for a high level at the control flow.
 
-The project is intended to demonstrate how NGRX state management works- dispatch actions to the store, update the store then listen to changes in the store via strongly typed selectors. Enjoy.
+Try to meet the game requirements listed below. 
+TIP: Search for the word 'todo' in the project and write the missing bits of typescript.
 
-## Development server
+* Make snake move around the map.
+	- Snake can not go back on itself e.g if moving right the snake cannot go immediately left.
+* If snake crashes into wall then game over
+* If snake crashes into his/her own body then game over.
+* Generate one apple that is randomly displayed on the map
+* If snake moves into apple:- 
+	-a new apple is generated.
+	-the score is incremented
+	-snakes body increases in length by one 'cell' length.
+* If you have time try to do implemennt a highest score feature.
+	
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

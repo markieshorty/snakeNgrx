@@ -6,11 +6,12 @@
 <button (click)="startGame()">Start game</button>
 
 <div class="arena">
-  <div class="snakeHead" [ngStyle]="{'top.px': snakeHeadPosition.y, 'left.px': snakeHeadPosition.x}">
+  <div class="snakeHead" [ngStyle]="{'top.px': snakePosition.y, 'left.px': snakePosition.x}">
   </div>
-  <div class="snakeBodyCell" *ngFor="let bodyCell of snakeHeadPosition.body"
+  <div class="snakeBodyCell" *ngFor="let bodyCell of snakePosition.body"
     [ngStyle]="{'top.px': bodyCell.y, 'left.px': bodyCell.x}"></div>
-  <div class="apple" [ngStyle]="{'top.px': apple.y, 'left.px': apple.x}"></div>
+  <!-- todo uncomment when apples are ready -->
+  <!-- <div class="apple" [ngStyle]="{'top.px': apple.y, 'left.px': apple.x}"></div> -->
   <div class="gameOver" *ngIf="gameOver">
     <h2>GAME OVER</h2>
   </div>
