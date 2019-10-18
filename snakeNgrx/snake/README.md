@@ -11,6 +11,7 @@ See ngrxDiagram.png in this folder for a high level at the control flow.
 
 Try to meet the game requirements listed below. 
 TIP: Search for the word 'todo' in the project and write the missing bits of typescript.
+TIP: Read all the comments - they will help you :D
 
 * Make snake move around the map. Start simple - get snakes head to move right accross the screen, then get his/her body to follow.
 	- Snake can not go back on itself e.g if moving right the snake cannot go immediately left.
@@ -21,7 +22,7 @@ TIP: Search for the word 'todo' in the project and write the missing bits of typ
 	-a new apple is generated.
 	-the score is incremented
 	-snakes body increases in length by one 'cell' length.
-* If you have time try to do implemennt a highest score feature.
+* If you have time try to implement a highest score feature.
 	
 
 
