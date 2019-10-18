@@ -1,6 +1,12 @@
 Hello and welcome to my NGRX Dojo.
 
-this is a learning exercise for 'NGRX' (A library for angular state mgmt) so please use the framework as it is intended.
+Scenario: 
+
+Sammy has partially written this snake game for Valve (!!) but he got fired for browsing Reddit excessively at work.
+You have been employed to finish what Sammy started and finish the shoddy snake game otherwise you will be fired too!
+
+NB: This is a learning exercise for 'NGRX' (A redux library for angular state mgmt)
+Please use the actual framework rather than circumnavigating it.
 See ngrxDiagram.png in this folder for a high level at the control flow.
 
 Try to meet the game requirements listed below. 
