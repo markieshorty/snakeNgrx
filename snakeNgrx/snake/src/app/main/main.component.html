@@ -1,16 +1,24 @@
-<h2 *ngIf="gameStarted">Eat Apples!</h2>
-<h2 *ngIf="!gameStarted">Click start to play game</h2>
-
-<h2>Current score: {{score}} Best score: {{highestScore}}</h2>
+<h2>Current score: {{ score }} Best score: {{ highestScore }}</h2>
 
 <button (click)="startGame()">Start game</button>
 
 <div class="arena">
-  <div class="snakeHead" [ngStyle]="{'top.px': snakeHeadPosition.y, 'left.px': snakeHeadPosition.x}">
-  </div>
-  <div class="snakeBodyCell" *ngFor="let bodyCell of snakeHeadPosition.body"
-    [ngStyle]="{'top.px': bodyCell.y, 'left.px': bodyCell.x}"></div>
-  <div class="apple" [ngStyle]="{'top.px': apple.y, 'left.px': apple.x}"></div>
+  <div
+    class="snakeHead"
+    [ngStyle]="{
+      'top.px': snakeHeadPosition.y,
+      'left.px': snakeHeadPosition.x
+    }"
+  ></div>
+  <div
+    class="snakeBodyCell"
+    *ngFor="let bodyCell of snakeHeadPosition.body"
+    [ngStyle]="{ 'top.px': bodyCell.y, 'left.px': bodyCell.x }"
+  ></div>
+  <div
+    class="apple"
+    [ngStyle]="{ 'top.px': apple.y, 'left.px': apple.x }"
+  ></div>
   <div class="gameOver" *ngIf="gameOver">
     <h2>GAME OVER</h2>
   </div>
